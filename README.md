@@ -155,6 +155,5 @@ Full features enabled:
 Limited features:
 - Serial communication only
   
-![Screenshot](1.png)
-![Screenshot](2.png)
+
 
