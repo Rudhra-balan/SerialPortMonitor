@@ -1,0 +1,61 @@
+﻿<Window x:Class="PortMoniter.PartialViews.Dialogs.Views.FileExport"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:converter="clr-namespace:PortMoniter.Controls.Converter"
+        mc:Ignorable="d" 
+        AllowsTransparency="True" 
+        WindowStartupLocation="CenterScreen" 
+        WindowStyle="None"
+        Background="{DynamicResource Backdrop}"
+        ResizeMode="NoResize" WindowState="Normal"
+        d:DataContext="{d:DesignInstance Type=viewModels:FileExportViewModel}"
+        Title="FileExport"  Height="180" Width="400">
+    <Window.Resources>
+        <converter:BrushColorConverter x:Key="BoolToColorConverter"></converter:BrushColorConverter>
+    </Window.Resources>
+    <Window.InputBindings>
+        <KeyBinding Key="Return" Command="{Binding OkCommand, Mode=OneTime}"/>
+        <KeyBinding Key="Esc" Command="{Binding CancelCommand, Mode=OneTime}"/>
+    </Window.InputBindings>
+    <Grid>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="20"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <StackPanel Grid.ColumnSpan="2" Orientation="Horizontal"  Background="{DynamicResource PrimaryBlueColor}" Panel.ZIndex="1" FlowDirection="RightToLeft" >
+                <Button  x:Name="btnClose" Style="{StaticResource IconButtonsStyleDra}" Content="{DynamicResource close}" Command="{Binding OkCommand, Mode=OneTime}" Tag="IsCloseButton"  Foreground="{DynamicResource TextPrimaryColor}" />
+            </StackPanel>
+
+<GroupBox Grid.Row="1" Header="Export Data" Style="{StaticResource GroupBoxStyleOverride}">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="0 5 0 5">
+                    <Label  Content="File location:" Width="90" Foreground= "{DynamicResource TextPrimaryColor}"/>
+                        <TextBox Foreground="{DynamicResource TextPrimaryColor}" Width="250" Text="{Binding FileLocation}" IsReadOnly="True"/>
+                        <Button Style="{DynamicResource btnBlue}" Width="35"   Margin="5" ToolTip="Change file location" Command="{Binding ChangeFileLocation}">
+                        <Path Width="20" Data="M16,12A2,2 0 0,1 18,10A2,2 0 0,1 20,12A2,2 0 0,1 18,14A2,2 0 0,1 16,12M10,12A2,2 0 0,1 12,10A2,2 0 0,1 14,12A2,2 0 0,1 12,14A2,2 0 0,1 10,12M4,12A2,2 0 0,1 6,10A2,2 0 0,1 8,12A2,2 0 0,1 6,14A2,2 0 0,1 4,12Z" Fill="{StaticResource ForegroundBrush}" Stretch="Uniform" />
+                    </Button>
+                </StackPanel>
+                <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="0 0 0 5">
+                    <Label Content="Filename:" Width="90" Foreground= "{DynamicResource TextPrimaryColor}"/>
+                        <TextBox  Foreground="{DynamicResource TextPrimaryColor}" Width="150" Text="{Binding FileName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" MaxLength="50"/>
+                        <ComboBox Style="{DynamicResource ComboBoxFlatStyle}" ItemsSource="{Binding FileExtensions}" SelectedItem="{Binding SelectedFileExtension}" MinWidth="100" Margin="5 0 0 0"/>
+                </StackPanel>
+                <StackPanel Grid.Row="2" Orientation="Horizontal" Margin="0 0 0 5">
+                    <Button Style="{DynamicResource btnBlue}" Width="110"  Content="Export Now"  Margin="90 0 0 0" Command="{Binding ExportFile}" />
+                    <Label Content="{Binding ExportStatus, FallbackValue='No action'}" Margin="10 0 0 0"
+                           Foreground="{Binding ExportStatusSuccess, Converter={StaticResource BoolToColorConverter}, FallbackValue={StaticResource ForegroundBrush}}"/>
+
+                 </StackPanel>
+            </Grid>
+        </GroupBox>
+    </Grid>
+    </Grid>
+</Window>

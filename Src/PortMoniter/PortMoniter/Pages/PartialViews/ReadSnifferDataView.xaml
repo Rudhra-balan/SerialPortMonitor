@@ -1,0 +1,41 @@
+﻿<UserControl x:Class="PortMoniter.Pages.PartialViews.ReadSnifferDataView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:controls="clr-namespace:PortMoniter.Controls"
+
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+    <Grid>
+        <GroupBox Header="READ DATA" Style="{DynamicResource GroupBoxStyleOverride}">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <TextBox Grid.Row="0" controls:TextBoxAutomaticScrollingExtension.ScrollOnTextChanged="{Binding ScrollOnTextChanged}"   Foreground="{DynamicResource TextPrimaryColor}" ScrollViewer.VerticalScrollBarVisibility="Auto"  x:Name="OutputBox"  Text="{Binding OutputText, Mode=OneWay}" Margin="5,0,5,0" IsReadOnly="True" VerticalScrollBarVisibility="Auto" TextWrapping="Wrap" FontFamily="Consolas" />
+
+                <Grid Grid.Row="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <CheckBox Style="{DynamicResource SerialPortCheckbox}" Grid.Column="0" VerticalAlignment="Center" VerticalContentAlignment="Center" IsChecked="{Binding IsShowTime, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Content="Show Time"  />
+                    <CheckBox Style="{DynamicResource SerialPortCheckbox}" Grid.Column="1" x:Name="Autoscroll" VerticalAlignment="Center" VerticalContentAlignment="Center" IsChecked="{Binding IsAutoscrollChecked, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="5,0,0,0" Content="{Binding ScrollConfirm}" IsEnabled="True"/>
+
+                    <StackPanel Grid.Column="2" Orientation="Horizontal" Margin="10">
+                        <ComboBox  Width="110" Height="30"  Style="{DynamicResource ComboBoxFlatStyle}" VerticalAlignment="Center" ItemsSource="{Binding OutputFormat}"  SelectedValue="{Binding SelectedOutputFormat, Mode=TwoWay}" />
+
+                        <!--<Button  Width="110" Height="30" Content="Export" Command="{Binding ExportFile}" Style="{DynamicResource btnBlue}" />-->
+                        <Button Style="{DynamicResource btnBlue}"  Width="110" Height="30"  Content="Clear"  Command="{Binding Clear}"/>
+                        
+                    </StackPanel>
+                </Grid>
+
+            </Grid>
+        </GroupBox>
+    </Grid>
+</UserControl>

@@ -1,0 +1,60 @@
+﻿<UserControl x:Class="PortMoniter.PartialViews.Dialogs.Views.SinfferExport"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:converter="clr-namespace:PortMoniter.Controls.Converter"
+             mc:Ignorable="d" 
+             d:DesignHeight="180" d:DesignWidth="300">
+    <UserControl.Resources>
+        <converter:BrushColorConverter x:Key="BoolToColorConverter"></converter:BrushColorConverter>
+    </UserControl.Resources>
+   
+    <Grid>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+           
+       <GroupBox  Header="Export Data" Style="{StaticResource GroupBoxStyleOverride}">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <StackPanel Grid.Row="0" Grid.Column="0" Orientation="Vertical">
+                    <StackPanel  Orientation="Horizontal" Margin="0 0 0 0">
+                        <Label  Content="File location:" Width="80" Foreground= "{DynamicResource TextPrimaryColor}"/>
+                        </StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="5 0 0 0">
+                        <TextBox Foreground="{DynamicResource TextPrimaryColor}" Width="180" Text="{Binding FileLocation}" IsReadOnly="True"/>
+                            <Button Style="{DynamicResource btnBlue}" Width="35"   ToolTip="Change file location" Command="{Binding ChangeFileLocation}">
+                            <Path Width="20" Data="M16,12A2,2 0 0,1 18,10A2,2 0 0,1 20,12A2,2 0 0,1 18,14A2,2 0 0,1 16,12M10,12A2,2 0 0,1 12,10A2,2 0 0,1 14,12A2,2 0 0,1 12,14A2,2 0 0,1 10,12M4,12A2,2 0 0,1 6,10A2,2 0 0,1 8,12A2,2 0 0,1 6,14A2,2 0 0,1 4,12Z" Fill="{StaticResource ForegroundBrush}" Stretch="Uniform" />
+                        </Button>
+                    </StackPanel>
+                </StackPanel>
+
+                <StackPanel  Grid.Row="1" Grid.Column="0" Orientation="Vertical">
+                    <StackPanel  Orientation="Horizontal" Margin="0 0 0 0">
+                        <Label Content="Filename:" Width="80" Foreground= "{DynamicResource TextPrimaryColor}"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="5 0 0 0">
+                        <TextBox  Foreground="{DynamicResource TextPrimaryColor}" Width="180" Text="{Binding FileName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" MaxLength="50"/>
+                        <ComboBox Width="55" Style="{DynamicResource ComboBoxFlatStyle}" ItemsSource="{Binding FileExtensions}" SelectedItem="{Binding SelectedFileExtension}"  Margin="0 0 0 0"/>
+
+                     </StackPanel>
+                </StackPanel>
+
+
+                <StackPanel Grid.Row="2" HorizontalAlignment="Right" Orientation="Horizontal" >
+                    <Button Style="{DynamicResource btnBlue}" Width="110"  Content="Export Now"   Command="{Binding ExportFile}" />
+                    <Label Content="{Binding ExportStatus, FallbackValue='No action'}" 
+                           Foreground="{Binding ExportStatusSuccess, Converter={StaticResource BoolToColorConverter}, FallbackValue={StaticResource ForegroundBrush}}"/>
+
+                 </StackPanel>
+            </Grid>
+        </GroupBox>
+    </Grid>
+    </Grid>
+</UserControl>

@@ -1,0 +1,63 @@
+﻿<Window x:Class="PortMoniter.PartialViews.Dialogs.Views.PortSetting"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" Background="#ECF0F1"
+        AllowsTransparency="True" 
+        WindowStartupLocation="CenterScreen" 
+        WindowStyle="None"
+        ResizeMode="NoResize" WindowState="Normal"
+        d:DataContext="{d:DesignInstance Type=viewModels:PortSettingViewModel}"
+        Title="PortSetting" Height="180" Width="400">
+    <Window.InputBindings>
+        <KeyBinding Key="Return" Command="{Binding OkCommand, Mode=OneTime}"/>
+        <KeyBinding Key="Esc" Command="{Binding CancelCommand, Mode=OneTime}"/>
+    </Window.InputBindings>
+    <Grid>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="20"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <StackPanel Grid.ColumnSpan="2" Orientation="Horizontal" Background="#444444" Panel.ZIndex="1" FlowDirection="RightToLeft" >
+                <Button  x:Name="btnClose" Style="{StaticResource IconButtonsStyle}" Content="{DynamicResource close}" Command="{Binding OkCommand, Mode=OneTime}" Tag="IsCloseButton"/>
+            </StackPanel>
+
+            <GroupBox  Grid.Row="1" Header="Serial Port Settings" Style="{StaticResource GroupBoxStyleOverride}">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                  
+                </Grid.RowDefinitions>
+              
+                <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="0 0 0 5">
+                    <Label Content="Baud rate:" Width="90" Foreground= "{DynamicResource TextPrimaryColor}"/>
+                        <ComboBox ItemsSource="{Binding BaudRates}" Style="{StaticResource ComboBoxFlatStyle}" DisplayMemberPath="BaudRateName" SelectedValue="{Binding SelectedBaudRate, Mode=TwoWay}" SelectedValuePath="BaudRateValue"
+                                      IsEnabled="{Binding EnableDisableSettings}" />
+                    <Label Content="Parity:" Margin="20 0 0 0" Foreground= "{DynamicResource TextPrimaryColor}"/>
+                    <ComboBox ItemsSource="{Binding Parities}" DisplayMemberPath="ParityName" SelectedValue="{Binding SelectedParity, Mode=TwoWay}" SelectedValuePath="ParityValue"
+                                      IsEnabled="{Binding EnableDisableSettings}" MinWidth="100"/>
+                </StackPanel>
+                <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="0 0 0 5">
+                    <Label Content="Data bits:" Width="90" Foreground= "{DynamicResource TextPrimaryColor}"/>
+                    <ComboBox ItemsSource="{Binding DataBits}" SelectedItem="{Binding SelectedDataBits, Mode=TwoWay}"
+                                      IsEnabled="{Binding EnableDisableSettings}" MinWidth="70"/>
+                    <Label Content="Stop bits:" Margin="20 0 0 0" Foreground= "{DynamicResource TextPrimaryColor}"/>
+                    <ComboBox ItemsSource="{Binding StopBitsList}" DisplayMemberPath="StopBitsName" SelectedValue="{Binding SelectedStopBits, Mode=TwoWay}" SelectedValuePath="StopBitsValue"
+                                      IsEnabled="{Binding EnableDisableSettings}" MinWidth="100"/>
+                </StackPanel>
+                <StackPanel Grid.Row="2" Orientation="Horizontal" Margin="0 0 0 5">
+                    <CheckBox VerticalAlignment="Center" VerticalContentAlignment="Center" IsChecked="{Binding IsDTR, Mode=TwoWay}" Content="Data Terminal Ready" Margin="85 0 0 0"
+                                      IsEnabled="{Binding EnableDisableSettings}"/>
+                    <CheckBox VerticalAlignment="Center" VerticalContentAlignment="Center" IsChecked="{Binding IsRTS, Mode=TwoWay}" Content="Request To Send" Margin="20 0 0 0"
+                                      IsEnabled="{Binding EnableDisableSettings}"/>
+                </StackPanel>
+            </Grid>
+        </GroupBox>
+        
+    </Grid>
+    </Grid>
+</Window>
