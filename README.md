@@ -1,4 +1,4 @@
-# Serial Port Monitor
+# Serial Port Monitor and port sniffer 
 
 ## Free & Open Source COM Port Monitoring Tool
 
