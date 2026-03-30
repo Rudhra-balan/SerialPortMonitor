@@ -18,6 +18,8 @@ Many serial port monitoring tools require **paid licenses or subscriptions**. Th
 - Serial data logging
 - Virtual COM port testing
 
+![Serial port UI](Serialportinfo.png)
+
 ## Features
 **Serial Port Monitoring (Sniffer Mode)**
 - Monitor data exchanged between:
